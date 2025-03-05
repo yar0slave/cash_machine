@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Кассовый аппарат</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Система кассового аппарата</h1>
+    <p>Добро пожаловать в систему кассового аппарата для вымышленного магазина.</p>
+
+    <h2>Доступные инструменты:</h2>
+    <ul>
+        <li><a href="/admin/" class="button">Панель администратора</a> - управление товарами и просмотр чеков</li>
+        <li><a href="/cash_machine/" class="button">Кассовый аппарат</a> - API для создания чеков</li>
+    </ul>
+
+    <h2>Как использовать:</h2>
+    <p>Для создания чека отправьте POST-запрос на "/cash_machine/" со следующей структурой:</p>
+    <pre>
+    {
+        "items": [1, 2, 3]
+    }
+    </pre>
+    <p>где числа - это ID товаров.</p>
+</body>
+</html>

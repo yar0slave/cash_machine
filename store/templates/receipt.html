@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Кассовый чек</title>
+  <style>
+    @page {
+      size: 58mm 150mm;
+      margin: 0;
+    }
+    body {
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      width: 50mm;
+      margin: 0 auto;
+      padding: 2mm;
+      line-height: 1.2;
+      background-color: white;
+    }
+    .header {
+      margin-bottom: 4px;
+    }
+    .num-line {
+      position: relative;
+      margin: 1px 0;
+    }
+    .right-align {
+      position: absolute;
+      right: 0;
+    }
+    .center {
+      text-align: center;
+    }
+    .item-name {
+      margin-top: 2px;
+    }
+    .item-row {
+      position: relative;
+      margin: 1px 0;
+    }
+    .item-price {
+      position: absolute;
+      right: 0;
+    }
+    .total-section {
+      margin-top: 8px;
+    }
+    .total-label {
+      font-weight: bold;
+    }
+    .total-value {
+      text-align: center;
+      margin: 2px 0;
+      font-weight: bold;
+    }
+    .payment-line {
+      position: relative;
+      margin: 2px 0;
+    }
+    .payment-value {
+      position: absolute;
+      right: 0;
+    }
+    .footer {
+      margin-top: 6px;
+    }
+    .spacer {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>ООО "КОМПАНИЯ К"</div>
+    <div>Добро пожаловать</div>
+    <div class="num-line">
+      <span>ККМ 0075411</span>
+      <span class="right-align">#3969</span>
+    </div>
+    <div>ИНН 1087746942040</div>
+    <div class="center">ЭКЛЗ 3851495566</div>
+    <div>{{ receipt.created_at|date:"d.m.y H:i" }} СИС.</div>
+    <div>  АДМИ</div>
+  </div>
+
+  <div class="items-section">
+    {% for receipt_item in receipt.receipt_items.all %}
+    <div class="item-name">{{ receipt_item.item }}</div>
+    <div class="item-row">
+      <span>&nbsp;&nbsp;&nbsp;{{ receipt_item.quantity }}</span>
+      <span class="item-price">={{ receipt_item.item.price }}</span>
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="total-section">
+    <div class="total-label">ИТОГ</div>
+    <div class="total-value">{{ receipt.total_amount }}</div>
+  </div>
+
+  <div class="payment-line">
+    <span>НАЛИЧНЫМИ</span>
+    <span class="payment-value">={{ receipt.total_amount }}</span>
+  </div>
+
+  <div class="footer">
+    <div class="center">***************************************</div>
+    <div class="center">{{ unique_id }}</div>
+  </div>
+</body>
+</html>
